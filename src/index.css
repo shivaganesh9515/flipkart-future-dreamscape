@@ -2,41 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Flipkart X - Futuristic E-commerce Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Brand Colors */
+    --flipkart-deep-blue: 219 79% 18%;     /* #0B1F49 */
+    --flipkart-electric-cyan: 187 100% 54%; /* #11E6FF */
+    --flipkart-warm-white: 240 100% 99%;    /* #FCFCFF */
+    
+    /* Design System Colors */
+    --background: 240 100% 99%;              /* warm-white */
+    --foreground: 219 79% 18%;               /* deep-blue */
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 219 79% 18%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 219 79% 18%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 219 79% 18%;                  /* deep-blue */
+    --primary-foreground: 240 100% 99%;      /* warm-white */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 20% 95%;
+    --secondary-foreground: 219 79% 18%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 15% 96%;
+    --muted-foreground: 219 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 187 100% 54%;                  /* electric-cyan */
+    --accent-foreground: 219 79% 18%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 240 100% 99%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 15% 90%;
+    --input: 220 15% 95%;
+    --ring: 187 100% 54%;                    /* electric-cyan */
 
-    --radius: 0.5rem;
+    /* Glassmorphism & Effects */
+    --glass-bg: 240 100% 99% / 0.8;
+    --glass-border: 187 100% 54% / 0.2;
+    --neon-glow: 0 0 20px hsl(187 100% 54% / 0.5);
+    --card-shadow: 0 8px 32px hsl(219 79% 18% / 0.1);
+    --card-shadow-hover: 0 16px 64px hsl(219 79% 18% / 0.15);
+    
+    /* Animation Timings */
+    --transition-fast: 60ms ease-in;
+    --transition-smooth: 160ms ease-out;
+    --transition-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    
+    --radius: 12px;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +116,71 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer components {
+  /* Glass Morphism Effects */
+  .glass-surface {
+    @apply backdrop-blur-md border border-accent/20;
+    background: hsl(var(--glass-bg));
+  }
+  
+  /* Product Card Animations */
+  .product-card {
+    @apply transition-all duration-[160ms] ease-out transform-gpu;
+    box-shadow: var(--card-shadow);
+  }
+  
+  .product-card:hover {
+    @apply -translate-y-2 scale-[1.02];
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-8px) scale(1.02) rotateY(2deg);
+  }
+  
+  /* Category Chip Glow */
+  .category-chip-active {
+    box-shadow: var(--neon-glow);
+    @apply bg-accent text-accent-foreground;
+  }
+  
+  /* Slide Transitions */
+  .slide-up-enter {
+    @apply opacity-0 translate-y-6;
+  }
+  
+  .slide-up-enter-active {
+    @apply opacity-100 translate-y-0 transition-all duration-[160ms] ease-out;
+  }
+  
+  /* Cart Drawer Spring Animation */
+  .cart-drawer {
+    @apply translate-x-full transition-transform duration-300;
+    transition-timing-function: var(--transition-spring);
+  }
+  
+  .cart-drawer.open {
+    @apply translate-x-0;
+  }
+  
+  /* CTA Pulse Animation */
+  .cta-pulse {
+    animation: pulse-scale 4s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-scale {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  
+  /* Smooth Page Transitions */
+  .page-transition-enter {
+    @apply opacity-0 translate-y-6;
+  }
+  
+  .page-transition-enter-active {
+    @apply opacity-100 translate-y-0;
+    transition: opacity 120ms ease-in, transform 160ms ease-out;
   }
 }

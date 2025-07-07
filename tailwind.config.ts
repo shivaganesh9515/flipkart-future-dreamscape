@@ -61,7 +61,22 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Flipkart X Brand Colors
+				'flipkart-blue': 'hsl(var(--flipkart-deep-blue))',
+				'flipkart-cyan': 'hsl(var(--flipkart-electric-cyan))',
+				'flipkart-white': 'hsl(var(--flipkart-warm-white))',
+			},
+			backdropBlur: {
+				xs: '2px',
+			},
+			boxShadow: {
+				'card': 'var(--card-shadow)',
+				'card-hover': 'var(--card-shadow-hover)',
+				'neon': 'var(--neon-glow)',
+			},
+			transitionTimingFunction: {
+				'spring': 'var(--transition-spring)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +99,31 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-scale': {
+					'0%, 100%': { transform: 'scale(1)' },
+					'50%': { transform: 'scale(1.05)' }
+				},
+				'slide-up': {
+					'0%': { opacity: '0', transform: 'translateY(24px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
+				},
+				'slide-right': {
+					'0%': { transform: 'translateX(100%)' },
+					'100%': { transform: 'translateX(0)' }
+				},
+				'fade-in': {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-scale': 'pulse-scale 4s ease-in-out infinite',
+				'slide-up': 'slide-up 0.16s ease-out',
+				'slide-right': 'slide-right 0.3s var(--transition-spring)',
+				'fade-in': 'fade-in 0.12s ease-in'
 			}
 		}
 	},
